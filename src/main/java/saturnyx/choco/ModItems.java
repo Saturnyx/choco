@@ -3,8 +3,14 @@ package saturnyx.choco;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.minecraft.component.type.ConsumableComponent;
+import net.minecraft.component.type.ConsumableComponents;
+import net.minecraft.component.type.FoodComponent;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
@@ -16,8 +22,16 @@ import java.util.function.Function;
 
 public class ModItems {
 
+    public static final ConsumableComponent CHOCOLATE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
+            // The duration is in ticks, 20 ticks = 1 second
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 6 * 20, 1), 1.0f))
+            .build();
+    public static final FoodComponent CHOCOLATE_COMPONENT = new FoodComponent.Builder()
+            .alwaysEdible()
+            .build();
+
     // Registering Chocolate
-    public static final Item CHOCOLATE = register("chocolate", Item::new, new Item.Settings());
+    public static final Item CHOCOLATE = register("chocolate", Item::new, new Item.Settings().food(CHOCOLATE_COMPONENT, CHOCOLATE_CONSUMABLE_COMPONENT));
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         // Create the item key.
@@ -44,6 +58,7 @@ public class ModItems {
         FuelRegistryEvents.BUILD.register((builder, context) -> {
             builder.add(ModItems.CHOCOLATE, 5 * 20);
         });
+        
     }
 }
 
