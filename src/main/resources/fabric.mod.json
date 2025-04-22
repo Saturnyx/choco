@@ -1,41 +1,41 @@
 {
-	"schemaVersion": 1,
-	"id": "choco",
-	"version": "${version}",
-	"name": "choco",
-	"description": "This is an example description! Tell everyone what your mod is about!",
-	"authors": [
-		"Me!"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/choco/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"saturnyx.choco.Choco"
-		],
-		"client": [
-			"saturnyx.choco.ChocoClient"
-		]
-	},
-	"mixins": [
-		"choco.mixins.json",
-		{
-			"config": "choco.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.16.13",
-		"minecraft": "~1.21.5",
-		"java": ">=21",
-		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
-	}
+  "schemaVersion": 1,
+  "id": "choco",
+  "version": "${version}",
+  "name": "choco",
+  "description": "Add Chocolate to Minecraft!",
+  "authors": [
+    "Harshal (Saturnyx)"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/choco/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "saturnyx.choco.Choco"
+    ],
+    "client": [
+      "saturnyx.choco.ChocoClient"
+    ]
+  },
+  "mixins": [
+    "choco.mixins.json",
+    {
+      "config": "choco.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.13",
+    "minecraft": "~1.21.5",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
 }

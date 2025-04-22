@@ -23,23 +23,19 @@ import java.util.function.Function;
 public class ModItems {
 
     public static final ConsumableComponent CHOCOLATE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
-            // The duration is in ticks, 20 ticks = 1 second
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 6 * 20, 1), 1.0f))
-            .build();
-    public static final FoodComponent CHOCOLATE_COMPONENT = new FoodComponent.Builder()
-            .alwaysEdible()
-            .build();
+            // The duration is in ticks, 20 ticks = 1-second
+            // Apply Absorption effect for 10 seconds
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 10 * 20, 1), 1.0f)).build();
+    public static final FoodComponent CHOCOLATE_COMPONENT = new FoodComponent.Builder().alwaysEdible().build();
 
-    // Registering Chocolate
+    // Register Chocolate
     public static final Item CHOCOLATE = register("chocolate", Item::new, new Item.Settings().food(CHOCOLATE_COMPONENT, CHOCOLATE_CONSUMABLE_COMPONENT));
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         // Create the item key.
         RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Choco.MOD_ID, name));
-
         // Create the item instance.
         Item item = itemFactory.apply(settings.registryKey(itemKey));
-
         // Register the item.
         Registry.register(Registries.ITEM, itemKey, item);
 
@@ -48,17 +44,13 @@ public class ModItems {
 
     public static void initialize() {
         // Get the event for modifying entries in the ingredients group.
-        // And register an event handler that adds our suspicious item to the ingredients group.
+        // And register an event handler that adds our chocolate to the ingredients group.
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register((itemGroup) -> itemGroup.add(ModItems.CHOCOLATE));
-        // Add the suspicious substance to the composting registry with a 30% chance of increasing the composter's level.
+        // Add the chocolate to the composting registry with a 30% chance of increasing the composter's level.
         CompostingChanceRegistry.INSTANCE.add(ModItems.CHOCOLATE, 0.3f);
-        // Add the suspicious substance to the registry of fuels, with a burn time of 5 seconds.
-        // Remember, Minecraft deals with logical based-time using ticks.
-        // 20 ticks = 1 second.
-        FuelRegistryEvents.BUILD.register((builder, context) -> {
-            builder.add(ModItems.CHOCOLATE, 5 * 20);
-        });
-        
+        // Add chocolate to the registry of fuels, with a burn time of 5 seconds.
+        // 20 ticks = 1 second (Minecraft deals with logical based-time using ticks)
+        FuelRegistryEvents.BUILD.register((builder, context) -> builder.add(ModItems.CHOCOLATE, 5 * 20));
     }
 }
 
