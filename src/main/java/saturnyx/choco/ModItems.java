@@ -6,11 +6,8 @@ import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.component.type.FoodComponent;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
-import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
@@ -21,16 +18,7 @@ import java.util.function.Function;
 
 
 public class ModItems {
-
-    public static final ConsumableComponent CHOCOLATE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
-            // The duration is in ticks, 20 ticks = 1-second
-            // Apply Absorption effect for 10 seconds
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 10 * 20, 1), 1.0f)).build();
-    public static final FoodComponent CHOCOLATE_COMPONENT = new FoodComponent.Builder().alwaysEdible().build();
-
-    // Register Chocolate
-    public static final Item CHOCOLATE = register("chocolate", Item::new, new Item.Settings().food(CHOCOLATE_COMPONENT, CHOCOLATE_CONSUMABLE_COMPONENT));
-
+    // REGISTER FUNCTION
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         // Create the item key.
         RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Choco.MOD_ID, name));
@@ -42,15 +30,36 @@ public class ModItems {
         return item;
     }
 
+    // Chocolate ------------------------------------------------------------------------------------------------------+
+    public static final ConsumableComponent CHOCOLATE_CONSUMABLE_COMPONENT = ConsumableComponents.food().build();
+    public static final FoodComponent CHOCOLATE_COMPONENT = new FoodComponent.Builder().alwaysEdible().nutrition(1).saturationModifier(0.6F).build();
+    public static final Item CHOCOLATE = register("chocolate", Item::new, new Item.Settings().food(CHOCOLATE_COMPONENT, CHOCOLATE_CONSUMABLE_COMPONENT));
+
+    // MILK CHOCOLATE -------------------------------------------------------------------------------------------------+
+    public static final ConsumableComponent MILK_CHOCOLATE_CONSUMABLE_COMPONENT = ConsumableComponents.food().build();
+    public static final FoodComponent MILK_CHOCOLATE_COMPONENT = new FoodComponent.Builder().alwaysEdible().nutrition(1).saturationModifier(0.5F).build();
+    public static final Item MILK_CHOCOLATE = register("milk_chocolate", Item::new, new Item.Settings().food(MILK_CHOCOLATE_COMPONENT, MILK_CHOCOLATE_CONSUMABLE_COMPONENT));
+
+    // WHITE CHOCOLATE ------------------------------------------------------------------------------------------------+
+    public static final ConsumableComponent WHITE_CHOCOLATE_CONSUMABLE_COMPONENT = ConsumableComponents.food().build();
+    public static final FoodComponent WHITE_CHOCOLATE_COMPONENT = new FoodComponent.Builder().alwaysEdible().nutrition(1).saturationModifier(0.4F).build();
+    public static final Item WHITE_CHOCOLATE = register("white_chocolate", Item::new, new Item.Settings().food(WHITE_CHOCOLATE_COMPONENT, WHITE_CHOCOLATE_CONSUMABLE_COMPONENT));
+
     public static void initialize() {
         // Get the event for modifying entries in the ingredients group.
         // And register an event handler that adds our chocolate to the ingredients group.
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register((itemGroup) -> itemGroup.add(ModItems.CHOCOLATE));
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register((itemGroup) -> itemGroup.add(ModItems.MILK_CHOCOLATE));
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register((itemGroup) -> itemGroup.add(ModItems.WHITE_CHOCOLATE));
         // Add the chocolate to the composting registry with a 30% chance of increasing the composter's level.
         CompostingChanceRegistry.INSTANCE.add(ModItems.CHOCOLATE, 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.MILK_CHOCOLATE, 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.WHITE_CHOCOLATE, 0.4f);
         // Add chocolate to the registry of fuels, with a burn time of 5 seconds.
         // 20 ticks = 1 second (Minecraft deals with logical based-time using ticks)
         FuelRegistryEvents.BUILD.register((builder, context) -> builder.add(ModItems.CHOCOLATE, 5 * 20));
+        FuelRegistryEvents.BUILD.register((builder, context) -> builder.add(ModItems.MILK_CHOCOLATE, 5 * 20));
+        FuelRegistryEvents.BUILD.register((builder, context) -> builder.add(ModItems.WHITE_CHOCOLATE, 6 * 20));
     }
 }
 

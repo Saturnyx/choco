@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "#M#",
+    "#S#"
+  ],
+  "key": {
+    "#": "minecraft:cocoa_beans",
+    "M": "minecraft:milk_bucket",
+    "S": "minecraft:sugar"
+  },
+  "result": {
+    "id": "choco:white_chocolate",
+    "count": 1
+  }
+}
