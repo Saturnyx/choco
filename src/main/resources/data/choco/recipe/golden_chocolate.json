@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GCG",
+    "GGG"
+  ],
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "C": "choco:chocolate"
+  },
+  "result": {
+    "id": "choco:golden_chocolate",
+    "count": 1
+  }
+}

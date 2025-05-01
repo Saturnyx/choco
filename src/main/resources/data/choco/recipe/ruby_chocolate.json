@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GCG",
+    "GGG"
+  ],
+  "key": {
+    "G": "minecraft:sweet_berries",
+    "C": "choco:chocolate"
+  },
+  "result": {
+    "id": "choco:ruby_chocolate",
+    "count": 1
+  }
+}
