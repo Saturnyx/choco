@@ -8,8 +8,8 @@ import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registry;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
@@ -33,21 +33,21 @@ public class ModItems {
     // Chocolate ------------------------------------------------------------------------------------------------------+
     public static final ConsumableComponent CHOCOLATE_CONSUMABLE_COMPONENT = ConsumableComponents.food().build();
     public static final FoodComponent CHOCOLATE_COMPONENT =
-            new FoodComponent.Builder().alwaysEdible().nutrition(1).saturationModifier(0.6F).build();
+            new FoodComponent.Builder().alwaysEdible().nutrition(2).saturationModifier(0.6F).build();
     public static final Item CHOCOLATE = register("chocolate", Item::new,
             new Item.Settings().food(CHOCOLATE_COMPONENT, CHOCOLATE_CONSUMABLE_COMPONENT));
 
     // MILK CHOCOLATE -------------------------------------------------------------------------------------------------+
     public static final ConsumableComponent MILK_CHOCOLATE_CONSUMABLE_COMPONENT = ConsumableComponents.food().build();
     public static final FoodComponent MILK_CHOCOLATE_COMPONENT =
-            new FoodComponent.Builder().alwaysEdible().nutrition(1).saturationModifier(0.5F).build();
+            new FoodComponent.Builder().alwaysEdible().nutrition(2).saturationModifier(0.5F).build();
     public static final Item MILK_CHOCOLATE = register("milk_chocolate", Item::new,
             new Item.Settings().food(MILK_CHOCOLATE_COMPONENT, MILK_CHOCOLATE_CONSUMABLE_COMPONENT));
 
     // WHITE CHOCOLATE ------------------------------------------------------------------------------------------------+
     public static final ConsumableComponent WHITE_CHOCOLATE_CONSUMABLE_COMPONENT = ConsumableComponents.food().build();
     public static final FoodComponent WHITE_CHOCOLATE_COMPONENT =
-            new FoodComponent.Builder().alwaysEdible().nutrition(1).saturationModifier(0.4F).build();
+            new FoodComponent.Builder().alwaysEdible().nutrition(2).saturationModifier(0.4F).build();
     public static final Item WHITE_CHOCOLATE = register("white_chocolate", Item::new,
             new Item.Settings().food(WHITE_CHOCOLATE_COMPONENT, WHITE_CHOCOLATE_CONSUMABLE_COMPONENT));
 
@@ -60,7 +60,7 @@ public class ModItems {
                             new net.minecraft.entity.effect.StatusEffectInstance(
                                     net.minecraft.entity.effect.StatusEffects.REGENERATION, 5 * 20, 0), 1.0f)).build();
     public static final FoodComponent GOLDEN_CHOCOLATE_COMPONENT =
-            new FoodComponent.Builder().alwaysEdible().nutrition(1).saturationModifier(0.3F).build();
+            new FoodComponent.Builder().alwaysEdible().nutrition(2).saturationModifier(0.3F).build();
     public static final Item GOLDEN_CHOCOLATE = register("golden_chocolate", Item::new,
             new Item.Settings().food(GOLDEN_CHOCOLATE_COMPONENT, GOLDEN_CHOCOLATE_CONSUMABLE_COMPONENT));
 
@@ -73,7 +73,7 @@ public class ModItems {
                             new net.minecraft.entity.effect.StatusEffectInstance(
                                     net.minecraft.entity.effect.StatusEffects.REGENERATION, 4 * 20, 0), 1.0f)).build();
     public static final FoodComponent RUBY_CHOCOLATE_COMPONENT =
-            new FoodComponent.Builder().alwaysEdible().nutrition(1).saturationModifier(0.3F).build();
+            new FoodComponent.Builder().alwaysEdible().nutrition(2).saturationModifier(0.3F).build();
     public static final Item RUBY_CHOCOLATE = register("ruby_chocolate", Item::new,
             new Item.Settings().food(RUBY_CHOCOLATE_COMPONENT, RUBY_CHOCOLATE_CONSUMABLE_COMPONENT));
 
